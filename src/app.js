@@ -85,12 +85,15 @@
 
 class IndecisionApp extends React.Component{
     render(){
+        const titleText='Indicision App';
+        const subTitleText='Small application using React';
+        const options=['one', 'two', 'three'];
         
         return(
          <div>
-                  <Header/>
+                  <Header title={titleText} subtitle={subTitleText}/>
                    <Action/>
-                   <Options/>
+                   <Options allOptions={options}/>
                    <AddOption/>
             
             </div>
@@ -106,11 +109,12 @@ class IndecisionApp extends React.Component{
 class Header extends React.Component{ //React is an object we're extending its components capability
     render(){ //es6 may not have any methods defined but in React needs render method to be defined all the time
         
+               
         //render returns JSX
         return (
             <div>
-            <h1>Indicision App</h1>
-            <h2>Small application using React</h2>
+            <h1>{this.props.title}</h1> 
+            <h2>{this.props.subtitle}</h2>
             </div>
         );
         
@@ -140,7 +144,18 @@ class Options extends React.Component{
         return(
           <div>
              <p>Here are your options</p>
-              <Option /> 
+             <p>Here is the length: {this.props.allOptions.length}</p>
+            
+       <ol>     
+       {
+         this.props.allOptions.map((option)=>{
+             return  <Option key={option} optionText={option} />
+         })
+        }
+     
+         </ol>   
+            
+           
             </div>
         );
         
@@ -163,11 +178,12 @@ class AddOption extends React.Component{
 
 class Option extends React.Component{
     render(){
-        
+      
         return(
-          <div>
-             <p>Every single option will go here....</p>
-            </div>
+      
+             <li>{this.props.optionText}</li>
+              
+         
         );
         
     }
